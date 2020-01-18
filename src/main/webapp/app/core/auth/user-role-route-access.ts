@@ -28,9 +28,13 @@ export class UserRoleRouteAccess implements CanActivate {
     return this.userRoleService.isEmployerObv().pipe(
       map(
         res => {
-          if (res)
-            ret = employerAccess.includes(state.url) ? true : false;
-          else ret = employeeAccess.includes(state.url) ? true : false;
+          if (res) {
+            ret = employerAccess.includes(state.url);
+            console.log(ret);
+            console.log(res);
+          }
+
+          else ret = employeeAccess.includes(state.url);
           if (ret) return true;
           else {
             this.router.navigate(['']);

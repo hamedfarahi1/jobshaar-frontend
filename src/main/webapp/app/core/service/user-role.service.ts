@@ -17,15 +17,14 @@ export class UserRoleService {
   ) {
     accountService.get().subscribe(res => {
       let user = res.body;
-      if (user && user.roleTypeIndex) {
-        this._userRole = user.roleTypeIndex;
-        this.setUserRole(this._userRole);
+      if (user && user.roleTypeIndex !== undefined) {
+        this.setUserRole(user.roleTypeIndex);
       }
     })
   }
   public setUserRole(roleName: string) {
-    this._isEmployer = roleName === '0';
-    this._userRole = this._isEmployer ? roleName : '1'
+    this._isEmployer = roleName == '0';
+    this._userRole = this._isEmployer ? '0' : '1'
   }
 
   public get userRole(): string {
@@ -39,18 +38,18 @@ export class UserRoleService {
   public isEmployerObv(): Observable<boolean> {
     let role = this.userRole;
     if (role == '0' || role == '1') {
-      this._isEmployer = role === '0';
+      this._isEmployer = role == '0';
       return of(this.isEmployer);
     }
     role = this.$localStorage.retrieve('role');
     if (role == '0' || role == '1') {
-      this._isEmployer = role === '0';
+      this._isEmployer = role == '0';
       return of(this.isEmployer);
     }
     else
       return this.accountService.get().pipe(
         map(res => {
-          if (res.body && res.body.roleTypeIndex)
+          if (res.body && res.body.roleTypeIndex !== undefined)
             role = res.body.roleTypeIndex;
           this.$localStorage.store('role', role);
           this._isEmployer = role == '0';

@@ -21,12 +21,7 @@ export class JobService {
     const query = <QueryParam>{
       page: pageIndex,
       size: pageSize,
-      filter: [
-        {
-          key: 'categoryTypeIndex.equals',
-          value: '3'
-        }
-      ]
+      filter: filter
     }
     const param = createRequestOption(query);
     return this.http.get<IJob[]>(`api/jobs/employee`, { params: param, observe: 'response' });

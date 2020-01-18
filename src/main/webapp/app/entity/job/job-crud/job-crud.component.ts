@@ -61,13 +61,13 @@ export class JobCrudComponent implements OnInit {
   cooperationTypes: KeyValue<number, string>[] = [];
   requiredGenders: KeyValue<number, string>[] = [];
   jobForm = new FormGroup({
-    categoryType: new FormControl('', [
+    categoryTypeIndex: new FormControl('0', [
       Validators.required
     ]),
-    cooperationType: new FormControl('', [
+    cooperationTypeIndex: new FormControl('1', [
       Validators.required
     ]),
-    requiredGender: new FormControl('', [
+    requiredGenderTypeIndex: new FormControl('2', [
       Validators.required
     ]),
     description: new FormControl('', [

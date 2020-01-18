@@ -9,7 +9,7 @@
               زمینه شغلی:
             </span>
             <mat-form-field>
-              <mat-select [(ngModel)]="selected[0]" formControlName="categoryType">
+              <mat-select [(ngModel)]="selected[0]" formControlName="categoryTypeIndex">
                 <mat-option *ngFor="let item of categoryTypes" [value]="item.key">
                   {{ item.value }}
                 </mat-option>
@@ -21,7 +21,7 @@
               بازه زمانی:
             </span>
             <mat-form-field>
-              <mat-select [(ngModel)]="selected[1]" formControlName="cooperationType">
+              <mat-select [(ngModel)]="selected[1]" formControlName="cooperationTypeIndex">
                 <mat-option *ngFor="let item of cooperationTypes" [value]="item.key">
                   {{ item.value }}
                 </mat-option>
@@ -35,7 +35,7 @@
               زمینه شغلی:
             </span>
             <mat-form-field>
-              <mat-select [(ngModel)]="selected[0]" formControlName="categoryType">
+              <mat-select [(ngModel)]="selected[0]" formControlName="categoryTypeIndex">
                 <mat-option *ngFor="let item of categoryTypes" [value]="item.key">
                   {{ item.value }}
                 </mat-option>
@@ -47,7 +47,7 @@
               بازه زمانی:
             </span>
             <mat-form-field>
-              <mat-select [(ngModel)]="selected[1]" formControlName="cooperationType">
+              <mat-select [(ngModel)]="selected[1]" formControlName="cooperationTypeIndex">
                 <mat-option *ngFor="let item of cooperationTypes" [value]="item.key">
                   {{ item.value }}
                 </mat-option>
@@ -61,7 +61,7 @@
               جنیسیت:
             </span>
             <mat-form-field>
-              <mat-select [(ngModel)]="selected[2]" formControlName="requiredGender">
+              <mat-select [(ngModel)]="selected[2]" formControlName="requiredGenderTypeIndex">
                 <mat-option *ngFor="let item of requiredGenders" [value]="item.key">
                   {{ item.value }}
                 </mat-option>

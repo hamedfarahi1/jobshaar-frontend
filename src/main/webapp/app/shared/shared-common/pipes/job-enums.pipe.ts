@@ -13,7 +13,7 @@ export class JobEnumPipe implements PipeTransform {
   // tslint:disable-next-line:no-any
   transform(value: any, name: string): string {
     const args = this.jobKeyValue.get(name);
-    const keyValue = args.find(arg => arg.key.toString() === value.toString());
+    const keyValue = args.find(arg => arg.key == value);
     if (keyValue)
       return keyValue.value;
     return '';

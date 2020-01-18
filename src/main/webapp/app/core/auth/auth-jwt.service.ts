@@ -41,12 +41,12 @@ export class AuthServerProvider {
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
           const jwt = bearerToken.slice(7, bearerToken.length);
           this.storeAuthenticationToken(jwt, true);
-          this.userRoleService.setUserRole(subUrl);
+          this.userRoleService.setUserRole(isEmployer ? '0' : '1');
           return jwt;
         } else if (bearerToken) {
           const jwt = bearerToken;
           this.storeAuthenticationToken(jwt, true);
-          this.userRoleService.setUserRole(subUrl);
+          this.userRoleService.setUserRole(isEmployer ? '0' : '1');
           return jwt;
         }
         return '';
@@ -71,12 +71,12 @@ export class AuthServerProvider {
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
           const jwt = bearerToken.slice(7, bearerToken.length);
           this.storeAuthenticationToken(jwt, true);
-          this.userRoleService.setUserRole(subUrl);
+          this.userRoleService.setUserRole(isEmployer ? '0' : '1');
           return jwt;
         } else if (bearerToken) {
           const jwt = bearerToken;
           this.storeAuthenticationToken(jwt, true);
-          this.userRoleService.setUserRole(subUrl);
+          this.userRoleService.setUserRole(isEmployer ? '0' : '1');
           return jwt;
         }
         return '';
