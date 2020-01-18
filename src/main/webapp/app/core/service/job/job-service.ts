@@ -14,8 +14,13 @@ export class JobService {
     return this.http.post('api/jobs', job);
   }
 
-  getEmployerJobs() {
-    return this.http.get<IJob[]>('api/jobs/employer');
+  getEmployerJobs(pageIndex: number, pageSize: number) {
+    const query = <QueryParam>{
+      page: pageIndex,
+      size: pageSize
+    }
+    const param = createRequestOption(query);
+    return this.http.get<IJob[]>('api/jobs/employer', { params: param, observe: 'response' });
   }
   getEmployeeJobs(pageIndex: number, pageSize: number, filter: KeyValue<string, string>[]): Observable<HttpResponse<IJob[]>> {
     const query = <QueryParam>{

@@ -6,6 +6,7 @@ import { JobService } from '@app/core/service/job/job-service';
 import { UserRoleService } from '@app/core/service/user-role.service';
 import { JobKeyValue } from '@app/shared/shared-common/key-value/job-key-value';
 import { getCustomPaginatorIntl } from '@app/shared/shared-common/paginator/custom-paginator';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-job-list',
@@ -52,7 +53,13 @@ export class JobListComponent implements OnInit {
   ngOnInit(): void {
     this.userRoleService.isEmployerObv().subscribe(res => {
       if (res)
-        this.jobService.getEmployerJobs().subscribe(res => this.jobs = res, error => console.log(error));
+        this.jobService.getEmployerJobs(0, 10).subscribe(res => {
+          const totalcount = res.headers.get('total-count');
+          if (totalcount)
+            this.totalCount = +totalcount;
+          if (res.body)
+            this.jobs = res.body
+        }, error => console.log(error));
       else
         this.jobService.getEmployeeJobs(0, 10, []).subscribe(res => {
           const totalcount = res.headers.get('total-count');
@@ -65,12 +72,22 @@ export class JobListComponent implements OnInit {
   }
 
   readPage(event: any, filter: KeyValue<string, string>[]) {
+    const filterResult: KeyValue<string, string>[] = [];
+    filter[0].value.length != 0 ? filterResult.push(filter[0]) : '';
+    filter[1].value.length != 0 ? filterResult.push(filter[1]) : '';
+    filter[2].value.length != 0 ? filterResult.push(filter[2]) : '';
     this.page = event.pageIndex;
     this.userRoleService.isEmployerObv().subscribe(res => {
       if (res)
-        this.jobService.getEmployerJobs().subscribe(res => this.jobs = res, error => console.log(error));
+        this.jobService.getEmployerJobs(this.page, 10).pipe(delay(1000)).subscribe(res => {
+          const totalcount = res.headers.get('total-count');
+          if (totalcount)
+            this.totalCount = +totalcount;
+          if (res.body)
+            this.jobs = res.body
+        }, error => console.log(error));
       else
-        this.jobService.getEmployeeJobs(this.page, 10, filter).subscribe(res => {
+        this.jobService.getEmployeeJobs(this.page, 10, filterResult).pipe(delay(1000)).subscribe(res => {
           const totalcount = res.headers.get('total-count');
           if (totalcount)
             this.totalCount = +totalcount;
@@ -126,6 +143,7 @@ export class JobListComponent implements OnInit {
           break;
         }
       }
+
     this.filter[0].value = this.categoryTypeIndexSelected.toString();
     this.filter[1].value = this.cooperationTypeIndexSelected.toString();
     this.filter[2].value = this.requiredGenderTypeIndexSelected.toString();
