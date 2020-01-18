@@ -1,0 +1,19 @@
+<!-- <mat-sidenav-container class="sidnav-container">
+  <mat-sidenav class="sidnav" #sidenav mode="side" position="end" [(opened)]="opened" (opened)="events.push('open!')"
+    (closed)="events.push('close!')"> <button style="color: brown;" mat-flat-button> feqgwg</button></mat-sidenav>
+  <mat-sidenav-content>
+
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<div>
+  <!-- <button mat-raised-button (click)="logout()">خروج</button> -->
+  <div class="container">
+    <mat-grid-list cols="1" rowHeight="260px">
+      <mat-grid-tile *ngFor="let tile of tiles;let i = index" [colspan]="tile.cols" [rowspan]="tile.rows"
+        [style.background]="tile.color">
+        <app-tile [title]="tile.text"></app-tile>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

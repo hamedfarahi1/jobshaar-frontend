@@ -1,0 +1,108 @@
+<!-- desktop-view -->
+<div *ngIf="step == 1" class="container desktop-view">
+  <ng-container *ngTemplateOutlet="employee"></ng-container>
+</div>
+<div *ngIf="step == 2" class="container moblie desktop-view ">
+  <ng-container *ngTemplateOutlet="employer"></ng-container>
+</div>
+
+<!-- mobile-view -->
+<div *ngIf="step == 1" class="container mobile mobile-view">
+  <ng-container *ngTemplateOutlet="employee"></ng-container>
+</div>
+<div *ngIf="step == 2" class="container mobile mobile-view ">
+  <ng-container *ngTemplateOutlet="employer"></ng-container>
+</div>
+
+
+<ng-template #employee>
+  <div class="register">
+    <span class="title">
+      ثبت نام در سایت
+    </span>
+    <div class="top-px">
+      <form [formGroup]="credentials">
+        <div style="display: flex;">
+          <div class="child">
+            <div>
+              <mat-form-field>
+                <input formControlName="username" id="username" matInput name="username" placeholder="نام کاربری">
+              </mat-form-field>
+            </div>
+            <div class="top-px">
+              <mat-form-field>
+                <input formControlName="password" type="password" id="password" matInput name="password"
+                  placeholder="رمز عبور">
+              </mat-form-field>
+            </div>
+            <div class="top-px">
+              <mat-form-field>
+                <input formControlName="email" id="email" matInput name="email" placeholder="ایمیل">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="top-px-double">
+      <button color="accent" style="width: 100%;" (click)="submit(group.value)" [disabled]="!credentials.valid"
+        mat-raised-button>ثبت نام</button>
+    </div>
+    <div class="login">
+      <a routerLink="../login">ورود</a>
+    </div>
+    <mat-button-toggle-group style="width: 100%; margin-top: 40px" #group="matButtonToggleGroup" value="1">
+      <mat-button-toggle style="width: 100%;" value="0">ورود کارفرما</mat-button-toggle>
+      <mat-button-toggle style="width: 100%;" value="1">ورود کارجو</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</ng-template>
+
+<ng-template #employer>
+  <div class="register">
+    <span class="title">
+      تکمیل ثبت نام
+    </span>
+    <div class="top-px">
+      <form [formGroup]="employerDetail">
+        <div style="display: flex;">
+          <div class="child-company">
+            <div class="top-px">
+              <mat-form-field>
+                <input formControlName="name" id="name" matInput name="name" placeholder="نام شرکت">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-select [(ngModel)]="selectedCategory" formControlName="categoryTypeIndex"
+                  placeholder="دسته ی شغلی">
+                  <mat-option *ngFor="let item of companyKeyValue" [value]="item.key">
+                    {{ item.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="top-px">
+              <mat-form-field>
+                <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5" formControlName="bio" id="bio" matInput name="bio"
+                  placeholder="درباره"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="top-px">
+              <mat-form-field>
+                <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5" formControlName="address" id="address" matInput name="address"
+                  placeholder="آدرس"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="top-px-double">
+      <button color="accent" style="width: 100%;" (click)="submitEmpolyer()" [disabled]="!employerDetail.valid"
+        mat-raised-button>تکمیل ثبت نام</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,50 @@
+
+.container {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  top: 70px;
+  right: 0;
+
+  &.isLogin {
+
+    top: 80px;
+    right: 120px;
+
+    .router-container {
+
+      div {
+        margin: auto;
+        padding: 1rem 1rem 0;
+
+        &.full {
+          max-width: none;
+        }
+
+        &.large {
+          max-width: 1340px;
+
+        }
+
+        &.medium {
+          max-width: 1170px;
+
+        }
+
+        &.small {
+          max-width: 680px;
+
+        }
+      }
+    }
+  }
+
+  .router-container {
+    position: relative;
+    display: block;
+    height: 100%;
+    overflow: auto;
+
+  }
+}

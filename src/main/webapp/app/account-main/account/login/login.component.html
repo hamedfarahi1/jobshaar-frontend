@@ -1,0 +1,44 @@
+<!-- desktop-view -->
+<div class="container desktop-view">
+  <ng-container *ngTemplateOutlet="login_tem"></ng-container>
+</div>
+
+<!-- mobile-view -->
+<div class="container mobile mobile-view">
+  <ng-container *ngTemplateOutlet="login_tem"></ng-container>
+</div>
+
+<ng-template #login_tem>
+  <div class="login">
+    <span class="title">
+      ورود به سایت
+    </span>
+    <div class="top-px">
+      <form [formGroup]="credentials">
+        <div>
+          <mat-form-field>
+            <input formControlName="username" id="username" matInput name="username" placeholder="نام کاربری">
+          </mat-form-field>
+        </div>
+        <div class="top-px">
+          <mat-form-field>
+            <input formControlName="password" type="password" id="password" matInput name="password"
+              placeholder="رمز عبور">
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+    <div class="top-px-double">
+      <button color="accent" (click)="login(group.value)" style="width: 100%;" [disabled]="!credentials.valid"
+        mat-raised-button>ورود</button>
+    </div>
+    <div class="register">
+      <a routerLink="../register">ثبت نام
+      </a>
+    </div>
+    <mat-button-toggle-group style="width: 100%; margin-top: 40px" #group="matButtonToggleGroup" value="1">
+      <mat-button-toggle style="width: 100%;" value="0">ورود کارفرما</mat-button-toggle>
+      <mat-button-toggle style="width: 100%;" value="1">ورود کارجو</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</ng-template>

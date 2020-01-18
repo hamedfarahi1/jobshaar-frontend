@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  margin: auto;
+  width: 340px;
+  background: rgba(255, 255, 255);
+  margin-top: 120px;
+  height: 70%;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.container.mobile {
+  width: 100%;
+  height: 100%;
+  margin-top: unset;
+}
+
+.login {
+  margin-right: 10%;
+  width: 80%;
+}
+
+.top-px {
+  margin-top: 20px;
+}
+
+.top-px-double {
+  margin-top: 40px;
+}
+
+.rmbrMe {
+  margin-right: 10px;
+}
+
+.title {
+  font-size: x-large;
+  text-align: center;
+  display: block;
+}
+
+.register {
+  margin-top: 15px;
+  text-align: center;
+  color: black;
+  a {
+    cursor: pointer;
+    text-decoration-line: none;
+  }
+}
+
+.as-employer {
+  margin-right: 5px;
+}

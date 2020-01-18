@@ -1,0 +1,14 @@
+.bmmt-loading {
+    position: fixed;
+    top: 0;
+    z-index: 999999;
+    background: rgba(255, 255, 255, 0.85);
+    width: 100%;
+    bottom: 0;
+    height: 100%;
+    padding-top: 50vh;
+    mat-progress-spinner {
+        margin: auto;
+        margin-top: -50px;
+    }
+}

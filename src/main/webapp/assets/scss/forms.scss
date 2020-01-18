@@ -1,0 +1,16 @@
+app-login,
+app-register {
+  .mat-form-field {
+    display: block !important;
+    text-align: right;
+    label {
+      padding-bottom: 40px;
+    }
+  }
+}
+
+app-home {
+  .mat-grid-tile .mat-figure {
+    display: block;
+  }
+}

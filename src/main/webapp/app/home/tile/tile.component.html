@@ -1,0 +1,7 @@
+<swiper class="swiper-container" [config]="config" (indexChange)="onIndexChange($event)" fxFlex="auto">
+  <div *ngFor="let slide of slides" class="swiper-slide">
+    <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+      {{slide}}
+    </div>
+  </div>
+</swiper>

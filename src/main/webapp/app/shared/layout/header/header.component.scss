@@ -1,0 +1,113 @@
+@import "../../../../assets/scss/variables";
+
+
+.top-toolbar {
+  width: 100%;
+  max-width: 1560px;
+    position: fixed;
+    margin: auto;
+    top: 0;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, .04), 0 1px 6px rgba(0, 0, 0, .04);
+    height: $topToolbarHeight;
+    background: $bgWidgetColor;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+
+    .toggle-sidenav {
+        &.hamburger {
+            .hamburger-box {
+                width: 20px;
+
+                .hamburger-inner {
+                    width: 20px;
+                    height: 1px;
+
+                    &::before,
+                    &::after {
+                        width: 20px;
+                        height: 1px;
+                    }
+
+                    &::before {
+                        top: -6px;
+                    }
+
+                    &::after {
+                        bottom: -6px;
+                    }
+                }
+            }
+
+            &.is-active {
+                .hamburger-box {
+                    .hamburger-inner {
+                        &::before {
+                            top: -4px;
+                            transform: translate3d(-6px, 0, 0) rotate(-45deg) scale(0.5, 1)
+                        }
+
+                        &::after {
+                            bottom: -4px;
+                            transform: translate3d(-6px, 0, 0) rotate(45deg) scale(0.5, 1)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.search-container {
+  width: 45%;
+  margin-right: 20px;
+}
+.app-logo {
+    text-align: center;
+    min-width: 105px;
+    display: inline-block;
+    vertical-align: middle;
+
+    img {
+        max-height: 60px;
+        margin-top: 8px;
+    }
+}
+
+
+.dropdown {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-top: 8px;
+  outline: none;
+}
+
+.imeg {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-top: -2px;
+  margin-right: -8px;
+  outline: none;
+}
+.item-icon {
+  margin-left: 10px;
+}
+
+.menu-container {
+  direction: rtl;
+}
+
+.item {
+  text-align: right;
+}
+
+.logo {
+  width: 8rem;
+}
+
+.side-nave-btn {
+  padding-top: 4px;
+  margin-right: -13px;
+}

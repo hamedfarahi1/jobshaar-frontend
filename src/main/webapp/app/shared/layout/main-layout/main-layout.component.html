@@ -1,0 +1,53 @@
+<div class="list-container">
+  <app-header [isOpen]="opened" (toggle)="sidenav.toggle()"></app-header>
+  <div style="top: 70px;">
+    <mat-sidenav-container class="example-container">
+      <mat-sidenav class="sid-nave" #sidenav mode="side" position="end" [(opened)]="opened">
+        <div class="div1">
+          <ng-container *ngTemplateOutlet="sideNavMenu">
+          </ng-container>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav-content>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>
+
+
+<ng-template #sideNavMenu>
+  <ng-container *ngIf="isEmployer">
+    <div class="employer-menu-container">
+      <div class="menu-item">
+        <button (click)="sidenav.toggle()" class="btn employer-menu" mat-flat-button [routerLink]="['job','add']">
+          <mat-icon>library_add</mat-icon>
+          <span class="my-span">
+            اضافه کردن
+          </span>
+        </button>
+      </div>
+      <div class="menu-item">
+        <button (click)="sidenav.toggle()" mat-flat-button class="btn employer-menu" [routerLink]="['job','list']">
+          <mat-icon>view_list</mat-icon>
+          <span class="my-span">
+            مشاهده همه
+          </span>
+        </button>
+      </div>
+      <hr class="my-hr">
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!isEmployer">
+    <div class="employer-menu-container">
+      <div class="menu-item">
+        <button (click)="sidenav.toggle()" mat-flat-button class="btn employer-menu" [routerLink]="['job','list']">
+          <mat-icon>view_list</mat-icon>
+          <span class="my-span">
+            مشاهده همه
+          </span>
+        </button>
+      </div>
+      <hr class="my-hr">
+    </div>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,8 @@
+<router-outlet *ngIf="!isAccountPage" name="main"></router-outlet>
+<div class="container" [ngStyle]="{ 'top.px': isAccountPage ? 0 : 70}">
+  <div class="router-container">
+    <div class="full">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

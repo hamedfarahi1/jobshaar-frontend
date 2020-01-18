@@ -1,0 +1,70 @@
+.top-nav {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  height: 5rem;
+  background-color: yellow;
+}
+
+.list-container {
+  position: relative;
+  z-index: 10;
+}
+
+.master-wrapper-page{
+  margin-top: 80px;
+}
+
+.example-container {
+  position: fixed;
+  top: 70px;
+  width: auto;
+  right: 0;
+  bottom: 0;
+}
+
+
+.div1 {
+  width: 250px;
+  display: inline-grid;
+  z-index: 100;
+}
+
+.main-sidenav {
+  width: 100%;
+  border: none;
+  box-shadow: 0 4px 20px 1px rgba(0, 0, 0, .06), 0 -1px 4px rgba(0, 0, 0, .08);
+}
+
+.sid-nave {
+  border: unset !important;
+  box-shadow: 0 8px 10px 3px rgba(0, 0, 0, 0.2);
+}
+
+.employer-menu-container{
+  width: 80%;
+  height: 300px;
+  margin: auto;
+  direction: rtl;
+  margin-top: 12px;
+}
+
+hr.my-hr {
+  margin-top: 17px;
+}
+
+.menu-item {
+  display: flex;
+  margin-top: 8px;
+}
+
+.my-span {
+  padding-top: 4px;
+  padding-right: 10px;
+}
+
+.btn {
+  width: 100%;
+  text-align: right;
+}
+

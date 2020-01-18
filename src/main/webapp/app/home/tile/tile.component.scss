@@ -1,0 +1,21 @@
+.tile {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  width: calc(100% - 70px);
+  height: calc(100% - 50px);
+  padding: 1px;
+  margin: auto;
+  border-radius: 15px;
+  img{
+    width: 100%; height: 100%;
+    opacity: 0.4;
+    margin: inherit;
+    border-radius: inherit;
+  }
+}
+
+.tile:hover {
+  transition: 0.2s;
+  padding: 6px;
+  box-shadow: 10px black;
+}
