@@ -102,7 +102,7 @@ export class JobListComponent implements OnInit {
             this.totalCount = +totalcount;
           if (res.body)
             this.jobs = res.body
-        }, error => console.log(error));
+        }, error => { console.log(error); this.totalCount = 0 });
       }
       else {
         const filterResult: KeyValue<string, string>[] = [];
@@ -117,7 +117,7 @@ export class JobListComponent implements OnInit {
             this.totalCount = +totalcount;
           if (res.body)
             this.jobs = res.body
-        }, () => console.log('error'));
+        }, error => { console.log(error); this.totalCount = 0 });
       }
 
     })
