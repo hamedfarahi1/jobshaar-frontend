@@ -1,6 +1,6 @@
 <div>
   <div class="container-mobile mobile-view">
-    <div class="filter-container mobile">
+    <div class="filter-container mobile" *ngIf="!isEmployer">
       <ng-container *ngTemplateOutlet="filter"></ng-container>
     </div>
     <div class="list-container mobile list-mobile">
@@ -9,7 +9,7 @@
   </div>
 
   <div class="container desktop-view">
-    <div class="filter-container">
+    <div class="filter-container" *ngIf="!isEmployer">
       <ng-container *ngTemplateOutlet="filter"></ng-container>
     </div>
     <div class="list-container">
@@ -41,8 +41,8 @@
   </ng-template>
 
   <ng-template #list>
-    <mat-grid-list cols="1" rowHeight="144px">
-      <mat-grid-tile *ngFor="let job of jobs;let i = index" [colspan]="1" [rowspan]="1">
+    <mat-grid-list [bmmtLoading]="totalCount" cols="1" rowHeight="144px">
+      <mat-grid-tile *ngFor="let job of jobs;let i = index" [colspan]="1" [rowspan]="job.id == tileId ? 3 : 1">
         <ng-container *ngTemplateOutlet="tile; context: { item: job }">
         </ng-container>
       </mat-grid-tile>
@@ -55,42 +55,55 @@
 
   <ng-template #tile let-job="item">
     <div class="tile-container">
-      <div class="logo-cont">
-        <div> <img class="logo-img" src="{{ '/assets/images/JPEG/' + charAt_0(job.id) + '.jpeg'}}">
+      <div class="preview-container" (click)="openTile(job.id)">
+        <div class="logo-cont">
+          <div> <img class="logo-img" src="{{ '/assets/images/JPEG/' + charAt_0(job.id) + '.jpeg'}}">
+          </div>
+          <div class="company-detail">
+            <div class="company-title desktop-view">
+              {{ job.company.name }}
+            </div>
+            <div class=" company-title company-mobile-title mobile-view">
+              {{ job.company.name }}
+            </div>
+            <div class="company-chip">
+              <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+                <mat-chip class="chips" selected>
+                  {{ job.cooperationTypeIndex | JobEnum : 'cooperationTypes' }}
+                </mat-chip>
+                <mat-chip class="chips" selected>
+                  {{ job.requiredGenderTypeIndex | JobEnum : 'requiredGenders'}}
+                </mat-chip>
+                <mat-chip class="chips" selected>
+                  {{ job.categoryTypeIndex | JobEnum : 'categoryTypes'}}
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
         </div>
-        <div class="company-detail">
-          <div class="company-title desktop-view">
-            {{ job.company.name }}
-          </div>
-          <div class=" company-title company-mobile-title mobile-view">
-            {{ job.company.name }}
-          </div>
-          <div class="company-chip">
-            <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
-              <mat-chip class="chips" selected>
-                {{ job.cooperationTypeIndex | JobEnum : 'cooperationTypes' }}
-              </mat-chip>
-              <mat-chip class="chips" selected>
-                {{ job.requiredGenderTypeIndex | JobEnum : 'requiredGenders'}}
-              </mat-chip>
-              <mat-chip class="chips" selected>
-                {{ job.categoryTypeIndex | JobEnum : 'categoryTypes'}}
-              </mat-chip>
-            </mat-chip-list>
-          </div>
+
+        <div class="actions">
+          <button class="resume-btn" mat-raised-button *ngIf="!isEmployer" (click)="openResumeDialog($event, job.id)">
+            <div class="resume-btn-title-mobile mobile-view">
+              ارسال رزومه
+            </div>
+            <div class="desktop-view">
+              ارسال رزومه
+            </div>
+          </button>
+          <button class="resume-btn" mat-raised-button *ngIf="isEmployer">
+            <div class="resume-btn-title-mobile mobile-view">
+              مشاهده رزومه ها
+            </div>
+            <div class="desktop-view">
+              مشاهده رزومه ها
+            </div>
+          </button>
         </div>
       </div>
-      <div class="actions">
-        <button class="resume-btn" mat-raised-button>
-          <div class="resume-btn-title-mobile mobile-view">
-            ارسال رزومه
-          </div>
-          <div class="desktop-view">
-            ارسال رزومه
-          </div>
-        </button>
+      <div [@openDescription]="job.id == tileId ? 'open' : 'close'">
+        <div class="description" [innerHTML]="job.description"></div>
       </div>
     </div>
   </ng-template>
-
 </div>

@@ -43,13 +43,15 @@
 }
 
 .tile-container {
-  display: flex;
   width: 95%;
   height: 100%;
-  background-color: #ffffff;
   margin-top: 18px;
 }
 
+.preview-container {
+  background-color: #ffffff;
+  display: flex;
+}
 .logo-cont {
   display: flex;
   margin-right: 10px;
@@ -109,4 +111,13 @@
   margin: auto;
   width: 95%;
   margin-top: 12px;
+}
+
+.description {
+  max-height: 280px;
+  width: 100%;
+  padding: 1px;
+  margin: auto;
+  padding-top: 1px;
+  overflow-y: auto;
 }

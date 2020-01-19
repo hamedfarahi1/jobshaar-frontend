@@ -30,8 +30,6 @@ export class UserRoleRouteAccess implements CanActivate {
         res => {
           if (res) {
             ret = employerAccess.includes(state.url);
-            console.log(ret);
-            console.log(res);
           }
 
           else ret = employeeAccess.includes(state.url);
