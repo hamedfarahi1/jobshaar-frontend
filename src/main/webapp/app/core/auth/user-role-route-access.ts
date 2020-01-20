@@ -5,10 +5,11 @@ import { map } from 'rxjs/operators';
 import { UserRoleService } from '../service/user-role.service';
 
 const employerAccess: string[] = [
-  '/job/add',
+  '/job/add'
 ]
 
 const employeeAccess: string[] = [
+  '/job/add/'
 ]
 
 @Injectable({ providedIn: 'root' })
@@ -31,8 +32,11 @@ export class UserRoleRouteAccess implements CanActivate {
           if (res) {
             ret = employerAccess.includes(state.url);
           }
-
-          else ret = employeeAccess.includes(state.url);
+          else {
+            if (state.url.startsWith('/job/add/') && state.url.length > 9) ret = true
+            else
+              ret = employeeAccess.includes(state.url);
+          }
           if (ret) return true;
           else {
             this.router.navigate(['']);

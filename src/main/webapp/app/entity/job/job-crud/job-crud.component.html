@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="editMode">
   <div class="container">
     <div class="header"></div>
     <form [formGroup]="jobForm">
@@ -82,3 +82,133 @@
     </button>
   </div>
 </div>
+<ng-container *ngIf="!editMode">
+  <div class="view-mode view-desktop">
+    <div class="view-container">
+      <ng-container *ngTemplateOutlet="detail"></ng-container>
+    </div>
+    <div class="resume-container">
+      <ng-container *ngTemplateOutlet="resumeTemplate"></ng-container>
+    </div>
+  </div>
+  <div class="view-mobile">
+    <div class="view-container-mobile">
+      <ng-container *ngTemplateOutlet="detail"></ng-container>
+    </div>
+    <div class="resume-container-mobile">
+      <ng-container *ngTemplateOutlet="resumeTemplate"></ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #detail>
+  <div class="logo-cont">
+    <div class="logo-img">
+      <img class="logo-img" src="{{ '/assets/images/JPEG/1.jpeg'}}">
+    </div>
+    <div class="company-detail">
+      <div class="company-title desktop-view">
+        {{ job.company.name }}
+      </div>
+      <div class=" company-title company-mobile-title mobile-view">
+        {{ job.company.name }}
+      </div>
+      <div class="chip desktop-view">
+        <ng-container *ngTemplateOutlet="chip"></ng-container>
+      </div>
+
+      <div class="chip chip-mobile mobile-view">
+        <ng-container *ngTemplateOutlet="chip"></ng-container>
+
+      </div>
+      <ng-template #chip>
+        <div>
+          <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+            <span>نوع بازه زمانی:</span>
+            <mat-chip class="chips" selected>
+              {{ job.cooperationTypeIndex | JobEnum : 'cooperationTypes' }}
+            </mat-chip>
+            <span class="margin-top">جنسیت:</span>
+            <mat-chip class="chips" selected>
+              {{ job.requiredGenderTypeIndex | JobEnum : 'requiredGenders'}}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+        <div class="bottom">
+          <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+            <span>دسته بندی:</span>
+            <mat-chip class="chips" selected>
+              {{ job.categoryTypeIndex | JobEnum : 'categoryTypes'}}
+            </mat-chip>
+            <span class="margin-top">دسته بندی شرکت:</span>
+            <mat-chip class="chips" selected>
+              {{ job.company.categoryTypeIndex | JobEnum : 'companyCategoryTypes'}}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </ng-template>
+      <hr>
+      <div class="margin-top-div">
+        <div [innerHTML]="job.description"></div>
+      </div>
+      <hr>
+      <div class="margin-top-div">
+        <div class="company-bio-title">
+          درباره شرکت
+        </div>
+        <div class="bio">
+          {{ job.company.bio }}
+        </div>
+      </div>
+      <hr>
+      <div class="address margin-top-div">
+        <div class="company-bio-title">
+          آدرس
+        </div>
+        <div class="bio">
+          {{ job.company.address }}
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #resumeTemplate>
+  <div class="employee-detail-container">
+    <div class="label-container">
+      <div style="padding: 1em 2em;">
+        <span>{{ userDetail.username }}</span>
+      </div>
+    </div>
+    <div class="label-container" style="font-size: smaller;">
+      <div style="padding: 1em 2em;">
+        <span>{{ userDetail.email }}</span>
+      </div>
+    </div>
+    <div class="input-container" *ngIf="requiredResume">
+
+      <div class="resume-warning">
+        شما رزومه ای برای ما ارسال نکردید. برای ارسال رزومه آدرس فایل رزومه را در کادر زیر وارد کنید
+      </div>
+      <form [formGroup]="newResume">
+        <mat-form-field>
+          <input formControlName="url" placeholder="آدرس فایل رزومه ی آپلود شده" matInput>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="send-box">
+      <button [disabled]="!newResume.valid && requiredResume" (click)="sendResume()" class="send-button"
+        mat-raised-button>
+        ارسال رزومه
+      </button>
+    </div>
+    <div class="resume-url" *ngIf="!requiredResume">
+      <div>
+        آدرس فایل:
+      </div>
+      <div class="url-href">
+        <a href="{{resume.url}}" target="_blank">{{ resume.url }}</a>
+      </div>
+    </div>
+  </div>
+</ng-template>

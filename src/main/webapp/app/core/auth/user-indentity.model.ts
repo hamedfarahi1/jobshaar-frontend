@@ -5,4 +5,6 @@ export interface IUserIdentity extends Account {
   lastName?: string;
   role?: string;
   roleTypeIndex?: string;
+  username?: string;
+  email?: string;
 }

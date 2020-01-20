@@ -55,7 +55,8 @@
 
   <ng-template #tile let-job="item">
     <div class="tile-container">
-      <div class="preview-container" (click)="openTile(job.id)">
+      <div class="preview-container" [routerLink]="['/','job', 'add', job.id]">
+        <!-- <div class="preview-container" (click)="openTile(job.id)"></div> -->
         <div class="logo-cont">
           <div> <img class="logo-img" src="{{ '/assets/images/JPEG/' + charAt_0(job.id) + '.jpeg'}}">
           </div>
@@ -83,7 +84,7 @@
         </div>
 
         <div class="actions">
-          <button class="resume-btn" mat-raised-button *ngIf="!isEmployer" (click)="openResumeDialog($event, job.id)">
+          <button class="resume-btn" mat-raised-button *ngIf="!isEmployer">
             <div class="resume-btn-title-mobile mobile-view">
               ارسال رزومه
             </div>
@@ -101,9 +102,9 @@
           </button>
         </div>
       </div>
-      <div [@openDescription]="job.id == tileId ? 'open' : 'close'">
+      <!-- <div [@openDescription]="job.id == tileId ? 'open' : 'close'">
         <div class="description" [innerHTML]="job.description"></div>
-      </div>
+      </div> -->
     </div>
   </ng-template>
 </div>

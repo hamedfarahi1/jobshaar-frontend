@@ -1,48 +1,19 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl } from '@angular/material';
 import { IJob } from '@app/core/model/job/job.model';
 import { JobService } from '@app/core/service/job/job-service';
 import { UserRoleService } from '@app/core/service/user-role.service';
 import { Optional } from '@app/core/typings/optional';
 import { JobKeyValue } from '@app/shared/shared-common/key-value/job-key-value';
 import { getCustomPaginatorIntl } from '@app/shared/shared-common/paginator/custom-paginator';
-import { ToastrService } from 'ngx-toastr';
 import { delay } from 'rxjs/operators';
-import { ResumePopupComponent } from '../resume-popup/resume-popup.component';
 
 @Component({
   selector: 'app-job-list',
   templateUrl: './job-list.component.html',
   styleUrls: ['./job-list.component.scss'],
   providers: [{ provide: MatPaginatorIntl, useClass: getCustomPaginatorIntl }],
-  animations: [
-    trigger('openDescription', [
-      state('open', style({
-        visibility: 'visible',
-        width: '90%',
-        backgroundColor: '#f4f4f4',
-        height: '65%',
-        margin: 'auto',
-        paddingRight: '12px'
-      })),
-      state('close', style({
-        backgroundColor: 'gray',
-        visibility: 'hidden',
-        width: '90%',
-        borderRadius: '20%',
-        height: '0px',
-        margin: 'auto'
-      })),
-      transition('open => close', [
-        animate('0.5s')
-      ]),
-      transition('close => open', [
-        animate('0.5s')
-      ])
-    ])
-  ]
 })
 export class JobListComponent implements OnInit {
 
@@ -76,9 +47,7 @@ export class JobListComponent implements OnInit {
   constructor(
     private jobService: JobService,
     private userRoleService: UserRoleService,
-    jobKeyValueService: JobKeyValue,
-    private dialog: MatDialog,
-    private toastr: ToastrService
+    jobKeyValueService: JobKeyValue
   ) {
     jobKeyValueService.getCategoryTypes().subscribe(res => this.jobKeyValues.push({ id: 0, title: 'دسته بندی', data: res }));
     jobKeyValueService.getCooperationTypes().subscribe(res => this.jobKeyValues.push({ id: 1, title: 'زمان', data: res }));
@@ -182,23 +151,6 @@ export class JobListComponent implements OnInit {
       return
     }
     this.tileId = id;
-  }
-
-  openResumeDialog(event: any, employeeId: number) {
-    event.stopPropagation();
-    const dialog = this.dialog.open(ResumePopupComponent, {
-      width: '600px',
-      height: '400px'
-    });
-    dialog.componentInstance.id = employeeId;
-    dialog.afterClosed().subscribe(res => {
-      if (res == null)
-        this.toastr.info('ثبت رزومه لغو شد', 'ثبت رزومه')
-      else if (res)
-        this.toastr.success('رزومه ی شما با موفقیت ثبت شد', 'ثبت رزومه');
-      else
-        this.toastr.error('خطا در ااتصال به سرور', 'ثبت رزومه');
-    });
   }
 }
 

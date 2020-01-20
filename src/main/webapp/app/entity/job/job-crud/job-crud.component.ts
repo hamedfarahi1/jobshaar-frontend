@@ -1,10 +1,15 @@
 import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AccountService } from '@app/core/auth/account.service';
+import { IUserIdentity } from '@app/core/auth/user-indentity.model';
+import { IResume } from '@app/core/model/resume/resume.model';
 import { JobService } from '@app/core/service/job/job-service';
+import { ResumeService } from '@app/core/service/resume/resume.service';
 import { JobKeyValue } from '@app/shared/shared-common/key-value/job-key-value';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-job-crud',
@@ -56,10 +61,23 @@ export class JobCrudComponent implements OnInit {
     ]
   };
 
+  requiredResume: boolean = false;
+  editMode: boolean = true;
   selected: number[] = [0, 1, 2];
   categoryTypes: KeyValue<number, string>[] = [];
   cooperationTypes: KeyValue<number, string>[] = [];
   requiredGenders: KeyValue<number, string>[] = [];
+
+  resume: IResume = { url: 'Url Not Found' }
+  newResume = new FormGroup({
+    url: new FormControl('', [Validators.required])
+  })
+  userDetail: IUserIdentity = {
+    id: '',
+    displayName: '',
+    authorities: [],
+    rpDisplayName: ''
+  };
   jobForm = new FormGroup({
     categoryTypeIndex: new FormControl('0', [
       Validators.required
@@ -76,27 +94,62 @@ export class JobCrudComponent implements OnInit {
         .minLength(200)
     ])
   })
-  constructor(
-    jobKeyValues: JobKeyValue,
-    private jobService: JobService,
-    private router: Router
-  ) {
-    jobKeyValues.getCategoryTypes().subscribe(
-      res => this.categoryTypes = res
-    )
-    jobKeyValues.getCooperationTypes().subscribe(
-      res => this.cooperationTypes = res
-    )
-    jobKeyValues.getRequiredGenders().subscribe(
-      res => this.requiredGenders = res
-    )
-  }
 
-  ngOnInit(): void { }
+  job: any = {}
+  constructor(
+    private jobKeyValues: JobKeyValue,
+    private jobService: JobService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private accountService: AccountService,
+    private resumeService: ResumeService,
+    private toastr: ToastrService
+  ) { }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(param => {
+      if (param.id) {
+        this.editMode = false;
+        this.jobService.getJob(24).subscribe(res => {
+          this.job = res;
+        });
+        this.resumeService.getResume().subscribe(res => this.resume = res, error => {
+          this.requiredResume = true;
+          console.log(error);
+        })
+        this.accountService.get().subscribe(res => res.body ? this.userDetail = res.body : '', error => console.log(error));
+      }
+      else {
+        this.jobKeyValues.getCategoryTypes().subscribe(
+          res => this.categoryTypes = res
+        )
+        this.jobKeyValues.getCooperationTypes().subscribe(
+          res => this.cooperationTypes = res
+        )
+        this.jobKeyValues.getRequiredGenders().subscribe(
+          res => this.requiredGenders = res
+        )
+      }
+    });
+  }
 
   submit() {
     this.jobService.add(this.jobForm.value).subscribe(() => {
       this.router.navigate(['job', 'list']);
     }, error => console.log(error));
+  }
+
+  sendResume() {
+    if (this.requiredResume) {
+      this.resumeService.addResume(this.newResume.value).subscribe(res => {
+        if (res) this.resumeService.sendResume(this.job.id).subscribe(res => {
+          this.toastr.info('رزومه ی شما با موفقیت ثبت شد', 'ثبت رزومه')
+          if (res) this.toastr.success('رزومه ی شما با موفقیت ارسال شد', 'ارسال رزومه');
+        })
+      });
+    }
+    else this.resumeService.sendResume(this.job.id).subscribe(res => {
+      if (res) this.toastr.success('رزومه ی شما با موفقیت ارسال شد', 'ارسال رزومه');
+    })
   }
 }

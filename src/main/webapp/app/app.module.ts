@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { JalaliMomentDateAdapter } from '@app/core/jalali-moment-adapter/jalali-moment-adapter';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { LocalStorageService, NgxWebstorageModule, SessionStorageService } from 'ngx-webstorage';
@@ -67,7 +68,7 @@ export const MY_DATE_FORMATS = {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerInterceptor,
       multi: true,
-      deps: [ToastrService, NetworkActivityService]
+      deps: [ToastrService, NetworkActivityService, Router]
     },
     {
       provide: HTTP_INTERCEPTORS,

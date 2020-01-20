@@ -113,6 +113,53 @@ const cooperationTypesArray: KeyValue<number, string>[] = [
     value: 'دورکاری'
   }
 ];
+
+const companyCategoryTypes: KeyValue<number, string>[] = [
+  {
+    key: 0,
+    value: 'IT'
+  },
+  {
+    key: 1,
+    value: 'Industry'
+  },
+  {
+    key: 2,
+    value: 'طراحی'
+  },
+  {
+    key: 3,
+    value: 'Content'
+  },
+  {
+    key: 4,
+    value: 'کسب و کار'
+  },
+  {
+    key: 5,
+    value: 'Financial'
+  },
+  {
+    key: 6,
+    value: 'آموزش'
+  },
+  {
+    key: 7,
+    value: 'معماری'
+  },
+  {
+    key: 8,
+    value: 'مکانیک'
+  },
+  {
+    key: 9,
+    value: 'ساخت و ساز'
+  },
+  {
+    key: 10,
+    value: 'روانشناسی'
+  }
+]
 export class JobKeyValue {
   getCategoryTypes(): Observable<KeyValue<number, string>[]> {
     return of(categoryArray);
@@ -124,6 +171,10 @@ export class JobKeyValue {
     return of(genderArray);
   }
 
+  getژompanyCategoryTypes(): Observable<KeyValue<number, string>[]> {
+    return of(companyCategoryTypes);
+  }
+
   get(name: string): KeyValue<number, string>[] {
     if (name === 'requiredGenders')
       return genderArray;
@@ -131,6 +182,8 @@ export class JobKeyValue {
       return cooperationTypesArray;
     if (name === 'categoryTypes')
       return categoryArray;
+    if (name === 'companyCategoryTypes')
+      return companyCategoryTypes;
     throw 'not exist';
   }
 }

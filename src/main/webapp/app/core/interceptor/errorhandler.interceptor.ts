@@ -1,11 +1,13 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { NetworkActivityService } from '@app/core/service/network-activity/network-activity.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 export class ErrorHandlerInterceptor implements HttpInterceptor {
-  constructor(private toastr: ToastrService, private networkActivityService: NetworkActivityService) {
+  constructor(private toastr: ToastrService, private networkActivityService: NetworkActivityService,
+    private router: Router) {
   }
 
   intercept(
@@ -27,12 +29,14 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
                   (err.url && err.url.includes('/api/account')))
               )
             ) {
+
               this.toastr.error("error", err.error, {
                 timeOut: 5000,
                 closeButton: true,
                 positionClass: 'toast-top-center'
               });
             }
+            if (err.status === 401) this.router.navigate(['account', 'login']);
           }
         }
       )

@@ -10,15 +10,13 @@ import { JobCrudComponent } from './job-crud/job-crud.component';
 import { JobListComponent } from './job-list/job-list.component';
 import { JobRoutingModule } from './job-routing.module';
 import { JobComponent } from './job.component';
-import { ResumePopupComponent } from './resume-popup/resume-popup.component';
 
 @NgModule({
   declarations: [
     JobComponent,
     JobCrudComponent,
     JobListComponent,
-    JobEnumPipe,
-    ResumePopupComponent
+    JobEnumPipe
   ],
   imports: [
     CommonModule,
@@ -32,6 +30,6 @@ import { ResumePopupComponent } from './resume-popup/resume-popup.component';
   providers: [
     JobKeyValue
   ],
-  entryComponents: [ResumePopupComponent]
+  entryComponents: []
 })
 export class JobModule { }
