@@ -1,10 +1,11 @@
 import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatPaginatorIntl } from '@angular/material';
+import { MatDialog, MatPaginatorIntl } from '@angular/material';
 import { IJob } from '@app/core/model/job/job.model';
 import { JobService } from '@app/core/service/job/job-service';
 import { UserRoleService } from '@app/core/service/user-role.service';
 import { Optional } from '@app/core/typings/optional';
+import { ResumeListComponent } from '@app/entity/resume/resume-list/resume-list.component';
 import { JobKeyValue } from '@app/shared/shared-common/key-value/job-key-value';
 import { getCustomPaginatorIntl } from '@app/shared/shared-common/paginator/custom-paginator';
 import { delay } from 'rxjs/operators';
@@ -47,7 +48,8 @@ export class JobListComponent implements OnInit {
   constructor(
     private jobService: JobService,
     private userRoleService: UserRoleService,
-    jobKeyValueService: JobKeyValue
+    jobKeyValueService: JobKeyValue,
+    private dialog: MatDialog
   ) {
     jobKeyValueService.getCategoryTypes().subscribe(res => this.jobKeyValues.push({ id: 0, title: 'دسته بندی', data: res }));
     jobKeyValueService.getCooperationTypes().subscribe(res => this.jobKeyValues.push({ id: 1, title: 'زمان', data: res }));
@@ -151,6 +153,11 @@ export class JobListComponent implements OnInit {
       return
     }
     this.tileId = id;
+  }
+
+  showResumes(jobId: number) {
+    const dialog = this.dialog.open(ResumeListComponent, { width: '500px', height: 'auto' });
+    dialog.componentInstance.jobId = jobId;
   }
 }
 

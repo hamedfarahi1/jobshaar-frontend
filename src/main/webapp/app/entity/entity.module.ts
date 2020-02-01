@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { JobModule } from './job/job.module';
+import { ResumeModule } from './resume/resume-list/resume-list.module';
 
 
 
@@ -8,10 +9,12 @@ import { JobModule } from './job/job.module';
   declarations: [],
   imports: [
     CommonModule,
-    JobModule
+    JobModule,
+    ResumeModule
   ],
   exports: [
-    JobModule
+    JobModule,
+    ResumeModule
   ]
 })
 export class EntityModule { }

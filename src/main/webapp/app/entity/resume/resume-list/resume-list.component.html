@@ -1,0 +1,19 @@
+<table mat-table [dataSource]="data">
+
+  <ng-container matColumnDef="url">
+    <th class="mat-header-cell" mat-header-cell *matHeaderCellDef>آدرس فایل</th>
+    <td mat-cell *matCellDef="let element">
+      <a href="{{ element.url }}" target="blank">
+        {{ element.url }}
+      </a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="index">
+    <th class="mat-header-cell" mat-header-cell *matHeaderCellDef> ردیف </th>
+    <td mat-cell *matCellDef="let element; let i = index"> {{ i }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="col"></tr>
+  <tr mat-row *matRowDef="let row; columns: col;"></tr>
+</table>

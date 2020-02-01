@@ -25,4 +25,8 @@ export class ResumeService {
     const option = { responseType: 'text' as 'text' };
     return this.http.post(`api/employee/apply-job?jobId=${jobId}`, null, option);
   }
+
+  getJobResumes(jobId: number) {
+    return this.http.get<[]>(`api/employer/resume?jobId=${jobId}`);
+  }
 }

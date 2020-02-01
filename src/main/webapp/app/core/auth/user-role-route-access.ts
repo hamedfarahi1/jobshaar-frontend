@@ -9,7 +9,7 @@ const employerAccess: string[] = [
 ]
 
 const employeeAccess: string[] = [
-  '/job/add/'
+  '/job/view/'
 ]
 
 @Injectable({ providedIn: 'root' })
@@ -33,7 +33,7 @@ export class UserRoleRouteAccess implements CanActivate {
             ret = employerAccess.includes(state.url);
           }
           else {
-            if (state.url.startsWith('/job/add/') && state.url.length > 9) ret = true
+            if (state.url.startsWith('/job/view/') && state.url.length > 9) ret = true
             else
               ret = employeeAccess.includes(state.url);
           }

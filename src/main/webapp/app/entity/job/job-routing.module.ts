@@ -19,7 +19,7 @@ const routes: Routes = [
         canActivate: [UserRoleRouteAccess]
       },
       {
-        path: 'add/:id',
+        path: 'view/:id',
         component: JobCrudComponent,
         canActivate: [UserRoleRouteAccess]
       },
