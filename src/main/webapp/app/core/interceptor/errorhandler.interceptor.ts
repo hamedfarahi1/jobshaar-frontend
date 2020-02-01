@@ -29,7 +29,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
                   (err.url && err.url.includes('/api/account')))
               )
             ) {
-
               this.toastr.error("error", err.error, {
                 timeOut: 5000,
                 closeButton: true,

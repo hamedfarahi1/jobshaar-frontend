@@ -199,7 +199,7 @@
     <div class="send-box">
       <button [disabled]="!newResume.valid && requiredResume" (click)="sendResume()" class="send-button"
         mat-raised-button>
-        ارسال رزومه
+        {{ requiredResume ? 'آپلود رزومه' : 'ارسال رزومه'}}
       </button>
     </div>
     <div class="resume-url" *ngIf="!requiredResume">

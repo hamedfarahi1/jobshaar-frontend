@@ -110,13 +110,10 @@ export class JobCrudComponent implements OnInit {
     this.route.params.subscribe(param => {
       if (param.id) {
         this.editMode = false;
-        this.jobService.getJob(24).subscribe(res => {
+        this.jobService.getJob(param.id).subscribe(res => {
           this.job = res;
         });
-        this.resumeService.getResume().subscribe(res => this.resume = res, error => {
-          this.requiredResume = true;
-          console.log(error);
-        })
+        this.resumeInit();
         this.accountService.get().subscribe(res => res.body ? this.userDetail = res.body : '', error => console.log(error));
       }
       else {
@@ -139,17 +136,28 @@ export class JobCrudComponent implements OnInit {
     }, error => console.log(error));
   }
 
+  resumeInit() {
+    this.requiredResume = false;
+    this.resumeService.getResume().subscribe(res => {
+      if (res !== null)
+        this.resume = res
+      else this.requiredResume = true;
+    }, error => {
+      this.requiredResume = true;
+      console.log(error);
+    })
+  }
+
   sendResume() {
-    if (this.requiredResume) {
+    if (this.requiredResume)
       this.resumeService.addResume(this.newResume.value).subscribe(res => {
-        if (res) this.resumeService.sendResume(this.job.id).subscribe(res => {
-          this.toastr.info('رزومه ی شما با موفقیت ثبت شد', 'ثبت رزومه')
-          if (res) this.toastr.success('رزومه ی شما با موفقیت ارسال شد', 'ارسال رزومه');
-        })
+        if (res) {
+          this.toastr.info('رزومه ی شما با موفقیت ثبت شد', 'ثبت رزومه');
+          this.resumeInit();
+        }
       });
-    }
-    else this.resumeService.sendResume(this.job.id).subscribe(res => {
-      if (res) this.toastr.success('رزومه ی شما با موفقیت ارسال شد', 'ارسال رزومه');
+    else this.resumeService.sendResume(this.job.id).subscribe(() => {
+      this.toastr.success('رزومه ی شما با موفقیت ارسال شد', 'ارسال رزومه');
     })
   }
 }
