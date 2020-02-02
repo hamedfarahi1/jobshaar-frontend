@@ -57,7 +57,7 @@ export class JobListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.readPage(0, []);
+    this.readPage({ pageIndex: 0 }, []);
   }
 
   readPage(event: any, filter: KeyValue<string, string>[]) {
