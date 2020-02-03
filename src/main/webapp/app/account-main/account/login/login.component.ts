@@ -52,9 +52,7 @@ export class LoginComponent implements AfterContentInit {
       })
       .then(() => {
         this.authenticationError = false;
-        this.isEmployer ?
-          this.router.navigate(['/job']) :
-          this.router.navigate(['/home']);
+        this.router.navigate(['job', 'list'])
       })
       .catch((error) => {
         this.authenticationError = true;

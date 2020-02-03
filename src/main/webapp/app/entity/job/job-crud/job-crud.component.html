@@ -3,6 +3,15 @@
     <div class="header"></div>
     <form [formGroup]="jobForm">
       <div class="form-container">
+        <div class="title-cont row-1">
+          <span>
+            عنوان:
+          </span>
+          <mat-form-field>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+              formControlName="title" id="title" matInput name="title" placeholder="عنوان شغل مورد نظر"></textarea>
+          </mat-form-field>
+        </div>
         <div class="row-1 desktop-view">
           <div>
             <span>

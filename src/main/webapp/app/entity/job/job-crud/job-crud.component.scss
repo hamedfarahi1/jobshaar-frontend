@@ -4,7 +4,8 @@
   width: 80%;
   margin: auto;
   margin-top: 100px;
-  min-height: 750px;
+  min-height: 810px;
+  height: auto;
   height: auto;
   background-color: #ffffff;
 }
@@ -240,4 +241,16 @@ hr {
   direction: ltr;
   width: 100%;
   overflow: auto;
+}
+
+.title-cont {
+  .mat-form-field {
+    width: 100%;
+    max-width: 478px;
+    display: block !important;
+    text-align: right !important;
+    label {
+      padding-bottom: 40px !important;
+    }
+  }
 }

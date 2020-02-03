@@ -24,7 +24,7 @@ export class JobCrudComponent implements OnInit {
     spellcheck: true,
     height: 'auto',
     minHeight: '300px',
-    maxHeight: 'auto',
+    maxHeight: '300px',
     width: 'auto',
     minWidth: '0',
     translate: 'yes',
@@ -79,6 +79,9 @@ export class JobCrudComponent implements OnInit {
     rpDisplayName: ''
   };
   jobForm = new FormGroup({
+    title: new FormControl('', [
+      Validators.required
+    ]),
     categoryTypeIndex: new FormControl('0', [
       Validators.required
     ]),

@@ -4,6 +4,7 @@ import { ICompany } from '../company/company.model';
 import { IEmployer } from '../employer/employer.model';
 
 export interface IJob extends ModelBase {
+  title?: string;
   employer?: IEmployer;
   universityTypeindex?: number;
   description: string;

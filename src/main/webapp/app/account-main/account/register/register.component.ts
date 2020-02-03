@@ -82,16 +82,14 @@ export class RegisterComponent implements OnInit {
       if (this.isEmployer)
         this.router.navigate(['account', 'register'], { queryParams: { step: 2 } })
       else {
-        this.isEmployer ?
-          this.router.navigate(['job']) :
-          this.router.navigate(['home'])
+        this.router.navigate(['job', 'list'])
       }
 
     });
   }
   submitEmpolyer() {
     this.companyService.add(this.employerDetail.value).subscribe(() => {
-      this.router.navigate(['job']);
+      this.router.navigate(['job', 'list']);
     }, error => {
       console.log(error);
     });
