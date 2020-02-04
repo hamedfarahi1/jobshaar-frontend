@@ -61,6 +61,7 @@ export class JobCrudComponent implements OnInit {
     ]
   };
 
+  isNotApplyedResume: boolean = true;
   requiredResume: boolean = false;
   editMode: boolean = true;
   selected: number[] = [0, 1, 2];
@@ -112,6 +113,9 @@ export class JobCrudComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(param => {
       if (param.id) {
+        this.resumeService.isApplied(param.id).subscribe(res => {
+          this.isNotApplyedResume = res != 'true';
+        })
         this.editMode = false;
         this.jobService.getJob(param.id).subscribe(res => {
           this.job = res;
@@ -160,6 +164,9 @@ export class JobCrudComponent implements OnInit {
         }
       });
     else this.resumeService.sendResume(this.job.id).subscribe(() => {
+      this.resumeService.isApplied(this.job.id).subscribe(res => {
+        this.isNotApplyedResume = res != 'true';
+      })
       this.toastr.success('رزومه ی شما با موفقیت ارسال شد', 'ارسال رزومه');
     })
   }

@@ -29,4 +29,9 @@ export class ResumeService {
   getJobResumes(jobId: number) {
     return this.http.get<[]>(`api/employer/resume?jobId=${jobId}`);
   }
+
+  isApplied(jobId: number) {
+    const option = { responseType: 'text' as 'text' };
+    return this.http.get(`api/employee/is-applied?jobId=${jobId}`, option);
+  }
 }

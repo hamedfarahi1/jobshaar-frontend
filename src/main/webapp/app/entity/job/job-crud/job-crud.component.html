@@ -206,9 +206,10 @@
       </form>
     </div>
     <div class="send-box">
-      <button [disabled]="!newResume.valid && requiredResume" (click)="sendResume()" class="send-button"
-        mat-raised-button>
-        {{ requiredResume ? 'آپلود رزومه' : 'ارسال رزومه'}}
+      <button [disabled]="(!newResume.valid && requiredResume || !isNotApplyedResume)" (click)="sendResume()"
+        class="send-button" [ngStyle]="{ 'background-color': !isNotApplyedResume ? 'rgb(62, 115, 146)' : '#15a9b5',
+      'color' : !isNotApplyedResume ? 'white' : 'unset'}" mat-raised-button>
+        {{ requiredResume ? 'آپلود رزومه' : (isNotApplyedResume ? 'ارسال رزومه' : 'رزومه ارسال شده')}}
       </button>
     </div>
     <div class="resume-url" *ngIf="!requiredResume">
