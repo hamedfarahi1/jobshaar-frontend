@@ -113,7 +113,7 @@
 <ng-template #detail>
   <div class="logo-cont">
     <div class="logo-img">
-      <img class="logo-img" src="{{ '/assets/images/JPEG/1.jpeg'}}">
+      <img class="logo-img" src="{{ '/assets/images/png/'+job.company.id+'.png'}}">
     </div>
     <div class="company-detail">
       <div class="company-title desktop-view">
@@ -157,25 +157,27 @@
         </div>
       </ng-template>
       <hr>
-      <div class="margin-top-div">
-        <div [innerHTML]="job.description"></div>
-      </div>
-      <hr>
-      <div class="margin-top-div">
-        <div class="company-bio-title">
-          درباره شرکت
+      <div style="width: 90%;">
+        <div class="margin-top-div">
+          <div [innerHTML]="job.description"></div>
         </div>
-        <div class="bio">
-          {{ job.company.bio }}
+        <hr>
+        <div class="margin-top-div">
+          <div class="company-bio-title">
+            درباره شرکت
+          </div>
+          <div class="bio">
+            {{ job.company.bio }}
+          </div>
         </div>
-      </div>
-      <hr>
-      <div class="address margin-top-div">
-        <div class="company-bio-title">
-          آدرس
-        </div>
-        <div class="bio">
-          {{ job.company.address }}
+        <hr>
+        <div class="address margin-top-div">
+          <div class="company-bio-title">
+            آدرس
+          </div>
+          <div class="bio">
+            {{ job.company.address }}
+          </div>
         </div>
       </div>
     </div>

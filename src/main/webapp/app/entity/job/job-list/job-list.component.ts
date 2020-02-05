@@ -24,6 +24,7 @@ export class JobListComponent implements OnInit {
   requiredGenderTypeIndexSelected: number[] = [];
 
   tileId = -1;
+  filterTemp: KeyValue<string, string>[] = [];
   filter: KeyValue<string, string>[] = [
     {
       key: 'categoryTypeIndex.in',
@@ -57,10 +58,10 @@ export class JobListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.readPage({ pageIndex: 0 }, []);
+    this.readPage({ pageIndex: 0 }, this.filterTemp);
   }
 
-  readPage(event: any, filter: KeyValue<string, string>[]) {
+  readPage(event: any, filter: KeyValue<string, string>[] | any) {
     this.totalCount = undefined;
     this.jobs = [];
     this.page = event.pageIndex;

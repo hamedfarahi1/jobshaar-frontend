@@ -39,7 +39,7 @@ export class UserRoleRouteAccess implements CanActivate {
           }
           if (ret) return true;
           else {
-            this.router.navigate(['']);
+            this.router.navigate(['job', 'list']);
             return false;
           }
         }

@@ -48,7 +48,8 @@
       </mat-grid-tile>
     </mat-grid-list>
     <div class="paginator">
-      <mat-paginator [length]="totalCount" [pageSize]="10" [pageSizeOptions]="[10]" (page)="readPage($event, filter)">
+      <mat-paginator *ngIf="totalCount" [length]="totalCount" [pageSize]="10" [pageSizeOptions]="[10]"
+        (page)="readPage($event, filter)">
       </mat-paginator>
     </div>
   </ng-template>
@@ -58,14 +59,14 @@
       <div class="preview-container" [routerLink]="isEmployer? [] : ['/','job', 'view', job.id]">
         <!-- <div class="preview-container" (click)="openTile(job.id)"></div> -->
         <div class="logo-cont">
-          <div> <img class="logo-img" src="{{ '/assets/images/JPEG/' + charAt_0(job.id) + '.jpeg'}}">
+          <div> <img class="logo-img" src="{{ '/assets/images/png/'+job.company.id+'.png'}}">
           </div>
           <div class="company-detail">
             <div class="company-title desktop-view">
-              {{ job.company.name }}
+              {{ job.title }}
             </div>
             <div class=" company-title company-mobile-title mobile-view">
-              {{ job.company.name }}
+              {{ job.title }}
             </div>
             <div class="company-chip">
               <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">

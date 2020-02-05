@@ -9,10 +9,6 @@ const genderArray: KeyValue<number, string>[] = [
   {
     key: 1,
     value: 'آقا'
-  },
-  {
-    key: 2,
-    value: 'مهم نیست'
   }
 ];
 

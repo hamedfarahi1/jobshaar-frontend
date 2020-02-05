@@ -76,11 +76,13 @@
 
 
 .dropdown {
-  width: 45px;
-  height: 45px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   margin-top: 8px;
   outline: none;
+  border: none;
+  background-color: white;
 }
 
 .imeg {

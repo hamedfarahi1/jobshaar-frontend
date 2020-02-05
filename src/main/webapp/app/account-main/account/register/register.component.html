@@ -1,20 +1,20 @@
-<!-- desktop-view -->
-<div *ngIf="step == 1" class="container desktop-view">
-  <ng-container *ngTemplateOutlet="employee"></ng-container>
-</div>
-<div *ngIf="step == 2" class="container moblie desktop-view ">
-  <ng-container *ngTemplateOutlet="employer"></ng-container>
-</div>
+<div>
+  <!-- desktop-view -->
+  <div *ngIf="step == 1" class="container desktop-view">
+    <ng-container *ngTemplateOutlet="employee"></ng-container>
+  </div>
+  <div *ngIf="step == 2" class="container moblie desktop-view ">
+    <ng-container *ngTemplateOutlet="employer"></ng-container>
+  </div>
 
-<!-- mobile-view -->
-<div *ngIf="step == 1" class="container mobile mobile-view">
-  <ng-container *ngTemplateOutlet="employee"></ng-container>
+  <!-- mobile-view -->
+  <div *ngIf="step == 1" class="container mobile mobile-view">
+    <ng-container *ngTemplateOutlet="employee"></ng-container>
+  </div>
+  <div *ngIf="step == 2" class="container mobile mobile-view ">
+    <ng-container *ngTemplateOutlet="employer"></ng-container>
+  </div>
 </div>
-<div *ngIf="step == 2" class="container mobile mobile-view ">
-  <ng-container *ngTemplateOutlet="employer"></ng-container>
-</div>
-
-
 <ng-template #employee>
   <div class="register">
     <span class="title">

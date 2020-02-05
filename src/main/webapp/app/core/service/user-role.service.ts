@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import { LocalStorageService } from 'ngx-webstorage';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { AccountService } from '../auth/account.service';
@@ -14,25 +13,8 @@ export class UserRoleService {
 
   constructor(
     private accountService: AccountService,
-    private $localStorage: LocalStorageService,
-    $sessionStorage: SessionStorageService,
-    router: Router
-  ) {
-    accountService.get().subscribe(res => {
-      let user = res.body;
-      if (user && user.roleTypeIndex !== undefined) {
-        this.setUserRole(user.roleTypeIndex);
-      } else {
-        new Observable(observer => {
-          this.$localStorage.clear('authenticationToken');
-          $sessionStorage.clear('authenticationToken');
-          this.$localStorage.clear('role');
-          observer.complete();
-        });
-        router.navigate(['account', 'login'])
-      }
-    })
-  }
+    private $localStorage: LocalStorageService
+  ) { }
   public setUserRole(roleName: string) {
     this._isEmployer = roleName == '0';
     this._userRole = this._isEmployer ? '0' : '1'
